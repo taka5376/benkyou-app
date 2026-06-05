@@ -328,6 +328,24 @@ body{font-family:'Zen Maru Gothic','Hiragino Maru Gothic Pro',sans-serif;
 }
 .start-gugu{font-size:14px;font-weight:700;color:rgba(255,180,220,.8);margin-top:18px}
 
+/* ── さくらんぼ計算アニメ ── */
+@keyframes skbFadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+@keyframes skbBounce{0%{transform:scale(0.3)}60%{transform:scale(1.2)}100%{transform:scale(1)}}
+@keyframes skbSlide{from{opacity:0;transform:translateX(-12px)}to{opacity:1;transform:translateX(0)}}
+@keyframes skbGlow{0%,100%{box-shadow:0 0 0 0 rgba(255,107,53,0)}50%{box-shadow:0 0 0 6px rgba(255,107,53,0.3)}}
+@keyframes skbLineGrow{from{stroke-dashoffset:100}to{stroke-dashoffset:0}}
+.skb-step-anim{opacity:0}
+.skb-step-anim.show{animation:skbFadeIn .4s ease forwards}
+.skb-num-pop{display:inline-block;animation:skbBounce .5s ease forwards}
+.skb-arrow-anim{opacity:0;animation:skbSlide .3s ease forwards}
+.skb-result-glow{animation:skbGlow 1s ease 2}
+.skb-block-wrap{display:flex;flex-wrap:wrap;gap:3px;justify-content:center;margin:6px 0;min-height:28px}
+.skb-block{width:22px;height:22px;border-radius:4px;opacity:0;transform:scale(0);transition:opacity .15s,transform .15s}
+.skb-block.show{opacity:1;transform:scale(1)}
+.skb-block-ten{background:#FF7043;border:2px solid #E64A19}
+.skb-block-add{background:#FFF9C4;border:2px solid #F9A825}
+.skb-block-result{background:#C8E6C9;border:2px solid #66BB6A}
+
 </style>
 </head>
 <body>
@@ -1098,12 +1116,14 @@ function ansKan(btn,ok,q){
     // 読み上げ→画像アニメ、両方終わったら補足表示
     recordKanjiMaster(q.q.replace(/[「」\n]/g,'').trim()||q.q);
     Promise.all([spJa(q.a), showEpop(q.e)]).then(()=>{
+      // ヒントボタンを隠す（正解後は不要）
+      document.querySelectorAll('.hint-btn').forEach(b=>b.style.display='none');
       const ex=$('kanex');
       if(ex&&q.ex){
         ex.classList.add('show');
-        ex.innerHTML=`💡 ${q.ex}<br><button onclick="nextQ()" style="margin-top:10px;background:var(--kan);color:white;border:none;border-radius:999px;padding:8px 24px;font-size:15px;font-weight:900;cursor:pointer;font-family:inherit">つぎへ ▶</button>`;
-        // 補足は読み上げるが .then は使わない（OKボタン待ちのため）
-        setTimeout(()=>spJa(q.exs||q.ex), 200);
+        ex.innerHTML=`💡 ${q.ex}`;
+        // 補足を読み上げ、終わったら自動で次へ
+        setTimeout(()=>spJa(q.exs||q.ex).then(nextQ), 200);
       } else {
         nextQ();
       }
@@ -1186,27 +1206,130 @@ function showHint(a,b,type){
   if(isA){
     const need=10-(a%10===0?10:a%10);
     const rest=b-need;
-    const rounded=a+need;  // 例: 15+5=20（次の10の区切り）
+    const rounded=a+need;
+
+    // ブロック表示（aの個数＋needの個数→roundedになる様子）
+    const makeBlocks=(count,cls)=>Array.from({length:count}).map((_,i)=>
+      `<div class="skb-block ${cls}" id="blk-${cls}-${i}"></div>`).join('');
+
     box.innerHTML=`
-      <div style="font-size:12px;font-weight:900;color:#E65100;margin-bottom:6px;text-align:center">🌸 さくらんぼ計算（くり上がり）</div>
-      ${skbSvgAdd(a,b,need,rest,rounded)}
-      <div style="font-size:13px;line-height:2;color:#4E342E;margin-top:6px">
-        <b>①</b> ${b} を <span style="color:#C62828;font-weight:900">${need}</span> と <span style="color:#1565C0;font-weight:900">${rest}</span> にわける<br>
-        <b>②</b> ${a} ＋ <span style="color:#C62828;font-weight:900">${need}</span> ＝ <span style="color:#2E7D32;font-weight:900">${rounded}</span>（きりのいい数！）<br>
-        <b>③</b> ${rounded} ＋ <span style="color:#1565C0;font-weight:900">${rest}</span> ＝ <span style="color:#FF6B35;font-weight:900;font-size:16px">${a+b}</span>
+      <div style="font-size:13px;font-weight:900;color:#E65100;margin-bottom:8px;text-align:center">🌸 さくらんぼ計算（くり上がり）</div>
+
+      <div class="skb-step-anim" id="skb-s1" style="background:#FFF9C4;border:2px solid #F9A825;border-radius:13px;padding:10px 12px;margin-bottom:7px">
+        <div style="font-size:12px;font-weight:900;color:#E65100;margin-bottom:5px">① ${b}を 分けよう🍒</div>
+        <div style="text-align:center;font-size:20px;font-weight:900;color:#C62828">
+          ${b} ＝ <span style="color:#C62828">${need}</span> ＋ <span style="color:#1565C0">${rest}</span>
+        </div>
+        <div style="display:flex;gap:4px;justify-content:center;margin-top:6px;flex-wrap:wrap">
+          ${Array.from({length:need}).map((_,i)=>`<div class="skb-block skb-block-ten" id="blk-need-${i}"></div>`).join('')}
+          <div style="width:6px"></div>
+          ${Array.from({length:rest}).map((_,i)=>`<div class="skb-block skb-block-add" id="blk-rest-${i}"></div>`).join('')}
+        </div>
+      </div>
+
+      <div class="skb-step-anim" id="skb-s2" style="background:#FFF3E0;border:2px solid #FFB74D;border-radius:13px;padding:10px 12px;margin-bottom:7px">
+        <div style="font-size:12px;font-weight:900;color:#E65100;margin-bottom:5px">② ${a} ＋ ${need} ＝ きりのいい数！</div>
+        <div style="text-align:center;font-size:22px;font-weight:900">
+          <span style="color:#E65100">${a}</span>
+          <span style="color:#999;font-size:18px"> ＋ </span>
+          <span style="color:#C62828">${need}</span>
+          <span style="color:#999;font-size:18px"> ＝ </span>
+          <span style="color:#2E7D32;font-size:28px" class="skb-num-pop">${rounded}</span>
+          <span style="font-size:13px;color:#2E7D32">✨</span>
+        </div>
+        <div style="display:flex;gap:3px;justify-content:center;margin-top:6px;flex-wrap:wrap" id="blk-rounded-wrap">
+          ${Array.from({length:Math.min(rounded,20)}).map((_,i)=>`<div class="skb-block skb-block-result" id="blk-r-${i}"></div>`).join('')}
+        </div>
+      </div>
+
+      <div class="skb-step-anim" id="skb-s3" style="background:#E8F5E9;border:2px solid #66BB6A;border-radius:13px;padding:10px 12px">
+        <div style="font-size:12px;font-weight:900;color:#2E7D32;margin-bottom:5px">③ ${rounded} ＋ ${rest} ＝ こたえ！</div>
+        <div style="text-align:center;font-size:24px;font-weight:900">
+          <span style="color:#2E7D32">${rounded}</span>
+          <span style="color:#999;font-size:18px"> ＋ </span>
+          <span style="color:#1565C0">${rest}</span>
+          <span style="color:#999;font-size:18px"> ＝ </span>
+          <span style="color:#FF6B35;font-size:32px;font-weight:900" class="skb-num-pop skb-result-glow">${a+b}</span>
+        </div>
       </div>`;
-    spJa(`${b}を${need}と${rest}にわけて、まず${rounded}を作ろう！`);
+
+    // 段階的アニメ＋音声
+    setTimeout(()=>{
+      $('skb-s1').classList.add('show');
+      // ブロックをパラパラ表示
+      for(let i=0;i<need;i++) setTimeout(()=>document.getElementById(`blk-need-${i}`)?.classList.add('show'),i*60);
+      for(let i=0;i<rest;i++) setTimeout(()=>document.getElementById(`blk-rest-${i}`)?.classList.add('show'),need*60+i*60);
+      spJa(`${b}を、${need}と${rest}にわけます`);
+    },100);
+    setTimeout(()=>{
+      $('skb-s2').classList.add('show');
+      for(let i=0;i<Math.min(rounded,20);i++) setTimeout(()=>document.getElementById(`blk-r-${i}`)?.classList.add('show'),i*50);
+      spJa(`${a}たす${need}は、${rounded}！きりのいい数になったよ！`);
+    },2200);
+    setTimeout(()=>{
+      $('skb-s3').classList.add('show');
+      spJa(`${rounded}たす${rest}は、${a+b}！これが こたえだよ！`);
+    },4000);
+
   } else {
+    // くり下がり
     const ones=a-10;
+    const diff=10-b;
+
     box.innerHTML=`
-      <div style="font-size:12px;font-weight:900;color:#283593;margin-bottom:6px;text-align:center">🌸 さくらんぼ計算（くり下がり）</div>
-      ${skbSvgSub(a,b,ones)}
-      <div style="font-size:13px;line-height:2;color:#4E342E;margin-top:6px">
-        <b>①</b> ${a} を <span style="color:#1565C0;font-weight:900">10</span> と <span style="color:#E65100;font-weight:900">${ones}</span> にわける<br>
-        <b>②</b> <span style="color:#1565C0;font-weight:900">10</span> － ${b} ＝ <span style="color:#2E7D32;font-weight:900">${10-b}</span><br>
-        <b>③</b> <span style="color:#2E7D32;font-weight:900">${10-b}</span> ＋ <span style="color:#E65100;font-weight:900">${ones}</span> ＝ <span style="color:#5865F2;font-weight:900;font-size:16px">${a-b}</span>
+      <div style="font-size:13px;font-weight:900;color:#283593;margin-bottom:8px;text-align:center">🌸 さくらんぼ計算（くり下がり）</div>
+
+      <div class="skb-step-anim" id="skb-s1" style="background:#E8EAF6;border:2px solid #7986CB;border-radius:13px;padding:10px 12px;margin-bottom:7px">
+        <div style="font-size:12px;font-weight:900;color:#283593;margin-bottom:5px">① ${a}を 分けよう🍒</div>
+        <div style="text-align:center;font-size:20px;font-weight:900;color:#283593">
+          ${a} ＝ <span style="color:#1565C0">10</span> ＋ <span style="color:#E65100">${ones}</span>
+        </div>
+        <div style="display:flex;gap:4px;justify-content:center;margin-top:6px;flex-wrap:wrap">
+          ${Array.from({length:10}).map((_,i)=>`<div class="skb-block skb-block-ten" id="blk-ten-${i}"></div>`).join('')}
+          ${ones>0?`<div style="width:6px"></div>${Array.from({length:ones}).map((_,i)=>`<div class="skb-block skb-block-add" id="blk-ones-${i}"></div>`).join('')}`:''}
+        </div>
+      </div>
+
+      <div class="skb-step-anim" id="skb-s2" style="background:#FFF3E0;border:2px solid #FFB74D;border-radius:13px;padding:10px 12px;margin-bottom:7px">
+        <div style="font-size:12px;font-weight:900;color:#E65100;margin-bottom:5px">② 10 から ${b} をひく</div>
+        <div style="text-align:center;font-size:22px;font-weight:900">
+          <span style="color:#1565C0">10</span>
+          <span style="color:#999;font-size:18px"> － </span>
+          <span style="color:#C62828">${b}</span>
+          <span style="color:#999;font-size:18px"> ＝ </span>
+          <span style="color:#2E7D32;font-size:28px" class="skb-num-pop">${diff}</span>
+        </div>
+        <div style="display:flex;gap:3px;justify-content:center;margin-top:6px;flex-wrap:wrap">
+          ${Array.from({length:10}).map((_,i)=>`<div class="skb-block ${i<diff?'skb-block-result':'skb-block-ten'}" id="blk-s2-${i}" style="${i>=diff?'opacity:0.25':''}" ></div>`).join('')}
+        </div>
+      </div>
+
+      <div class="skb-step-anim" id="skb-s3" style="background:#E8F5E9;border:2px solid #66BB6A;border-radius:13px;padding:10px 12px">
+        <div style="font-size:12px;font-weight:900;color:#2E7D32;margin-bottom:5px">③ ${diff} ＋ ${ones} ＝ こたえ！</div>
+        <div style="text-align:center;font-size:24px;font-weight:900">
+          <span style="color:#2E7D32">${diff}</span>
+          <span style="color:#999;font-size:18px"> ＋ </span>
+          <span style="color:#E65100">${ones}</span>
+          <span style="color:#999;font-size:18px"> ＝ </span>
+          <span style="color:#5865F2;font-size:32px;font-weight:900" class="skb-num-pop skb-result-glow">${a-b}</span>
+        </div>
       </div>`;
-    spJa(`${a}を10と${ones}にわけて、10から${b}をひこう！`);
+
+    setTimeout(()=>{
+      $('skb-s1').classList.add('show');
+      for(let i=0;i<10;i++) setTimeout(()=>document.getElementById(`blk-ten-${i}`)?.classList.add('show'),i*50);
+      for(let i=0;i<ones;i++) setTimeout(()=>document.getElementById(`blk-ones-${i}`)?.classList.add('show'),10*50+i*60);
+      spJa(`${a}を、10と${ones}にわけます`);
+    },100);
+    setTimeout(()=>{
+      $('skb-s2').classList.add('show');
+      for(let i=0;i<10;i++) setTimeout(()=>document.getElementById(`blk-s2-${i}`)?.classList.add('show'),i*50);
+      spJa(`10から${b}をひくと、${diff}！`);
+    },2200);
+    setTimeout(()=>{
+      $('skb-s3').classList.add('show');
+      spJa(`${diff}たす${ones}は、${a-b}！これが こたえだよ！`);
+    },4000);
   }
 }
 
@@ -2347,13 +2470,23 @@ setTimeout(spawnRunner, 12000);
 
 // ── ごほうびキャラの成長ステージ ──
 const REWARD_STAGES = [
-  {char:'🥚', name:'たまご',     msg:'もうすぐかえるよ！',       need:0},
-  {char:'🐣', name:'うまれた！', msg:'かなとにあえてうれしい！',  need:10},
-  {char:'🐥', name:'ひよこ',     msg:'ぴよぴよ！',               need:30},
-  {char:'🐤', name:'おおきくなった！', msg:'げんきいっぱい！',   need:60},
-  {char:'🐧', name:'ペンギン！', msg:'ぐぐがが〜！',             need:100},
-  {char:'🦅', name:'たかとびペンギン！',msg:'そらをとべるよ！',  need:150},
-  {char:'🌟', name:'スターペンギン！', msg:'きみのおかげだよ！', need:200},
+  {char:'🥚', name:'たまご',         msg:'もうすぐかえるよ！',             need:0},
+  {char:'🐣', name:'うまれた！',     msg:'かなとにあえてうれしいよ！',     need:10},
+  {char:'🐥', name:'ひよこ',         msg:'ぴよぴよ！げんきだよ！',         need:25},
+  {char:'🐤', name:'おおきいひよこ', msg:'もっとおおきくなるよ！',         need:45},
+  {char:'🐦', name:'ことり',         msg:'ちゅんちゅん！うれしいな！',     need:70},
+  {char:'🦜', name:'おしゃべりとり', msg:'かなとすごい！かなとすごい！',   need:100},
+  {char:'🐧', name:'ペンギン！',     msg:'ぐぐがが〜！',                   need:135},
+  {char:'🐧', name:'ダンスペンギン', msg:'いっしょにおどろう！ぐぐがが！', need:175},
+  {char:'🦭', name:'アザラシ',       msg:'ぱふぱふ〜！かなとえらい！',     need:220},
+  {char:'🐬', name:'イルカ',         msg:'きゅいきゅい！すごいね！',       need:270},
+  {char:'🦊', name:'きつね',         msg:'こんこん！てんさいだ！',         need:325},
+  {char:'🐼', name:'パンダ',         msg:'ももももも〜！さいこう！',       need:385},
+  {char:'🦁', name:'ライオン',       msg:'がおー！かなとはヒーローだ！',   need:450},
+  {char:'🐉', name:'ドラゴン',       msg:'かなとのちからがすごい！',       need:520},
+  {char:'🦄', name:'ユニコーン',     msg:'まほうのちからがめざめた！',     need:600},
+  {char:'🌈', name:'にじペンギン',   msg:'ぐぐがが〜！にじいろだよ！',     need:700},
+  {char:'🌟', name:'スターペンギン', msg:'きみのおかげで ほしになれた！',  need:850},
 ];
 
 // ── localStorage保存/読み込み ──
