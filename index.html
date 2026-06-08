@@ -350,9 +350,6 @@ body{font-family:'Zen Maru Gothic','Hiragino Maru Gothic Pro',sans-serif;
 .skb-block-wrap{display:flex;flex-wrap:wrap;gap:3px;justify-content:center;margin:6px 0;min-height:28px}
 .skb-block{width:22px;height:22px;border-radius:4px;opacity:0;transform:scale(0);transition:opacity .15s,transform .15s}
 .skb-block.show{opacity:1;transform:scale(1)}
-.skb-block-ten{background:#FF7043;border:2px solid #E64A19}
-.skb-block-add{background:#FFF9C4;border:2px solid #F9A825}
-.skb-block-result{background:#C8E6C9;border:2px solid #66BB6A}
 
 
 /* ══════════════════════════════════════════
@@ -894,8 +891,8 @@ const KAN={
     {q:"下", a:"した",     w:["うえ","なか","そと"],         e:"⬇️", ex:"「した」のほかに「か」とも読むよ！「したくつ」「かいだん」！", exs:"したのほかに、かとも読むよ！したくつやかいだんに使うね！"},
     {q:"左", a:"ひだり",   w:["みぎ","うえ","した"],         e:"👈", ex:"「ひだり」は「ひだりて」「ひだりがわ」という言葉にも使うよ！", exs:"ひだりは、ひだりてやひだりがわという言葉にも使うよ！"},
     {q:"右", a:"みぎ",     w:["ひだり","まえ","うしろ"],     e:"👉", ex:"「みぎ」は「みぎて」「みぎがわ」という言葉にも使うよ！", exs:"みぎは、みぎてやみぎがわという言葉にも使うよ！"},
-    {q:"大", a:"おおきい", w:["ちいさい","ながい","みじかい"],e:"🐘", ex:"「おおきい」のほかに「だい」とも読むよ！「だいがく」「たいせつ」！", exs:"おおきいのほかに、だいとも読むよ！だいがくやたいせつに使うね！"},
-    {q:"小", a:"ちいさい", w:["おおきい","ふとい","ほそい"],  e:"🐭", ex:"「ちいさい」のほかに「しょう」とも読むよ！「しょうがっこう」！", exs:"ちいさいのほかに、しょうとも読むよ！しょうがっこうに使うね！"},
+    {q:"大", a:"おお(きい)", w:["ちい(さい)","なが(い)","みじか(い)"],e:"🐘", ex:"「おおきい」のほかに「だい」とも読むよ！「だいがく」「たいせつ」！", exs:"おおきいのほかに、だいとも読むよ！だいがくやたいせつに使うね！"},
+    {q:"小", a:"ちい(さい)", w:["おお(きい)","ふと(い)","ほそ(い)"],  e:"🐭", ex:"「ちいさい」のほかに「しょう」とも読むよ！「しょうがっこう」！", exs:"ちいさいのほかに、しょうとも読むよ！しょうがっこうに使うね！"},
     {q:"中", a:"なか",     w:["そと","うえ","した"],         e:"📦", ex:"「なか」のほかに「ちゅう」とも読むよ！「ちゅうがっこう」！", exs:"なかのほかに、ちゅうとも読むよ！ちゅうがっこうに使うね！"},
     {q:"手", a:"て",       w:["あし","かお","め"],           e:"🖐️", ex:"「て」は「てがみ」「てつだう」という言葉にも使うよ！", exs:"ては、てがみやてつだうという言葉にも使うよ！"},
     {q:"口", a:"くち",     w:["め","みみ","はな"],           e:"👄", ex:"「くち」のほかに「こう」とも読むよ！「いりぐち」「でぐち」！", exs:"くちのほかに、こうとも読むよ！いりぐちやでぐちに使うね！"},
@@ -908,10 +905,10 @@ const KAN={
     {q:"十", a:"じゅう",   w:["ひゃく","さん","ご"],         e:"🔟", ex:"「じゅう」のほかに「とお」とも読むよ！「とおか」「じゅうぶん」！", exs:"じゅうのほかに、とおとも読むよ！とおかやじゅうぶんに使うね！"},
   ],
   3:[ /* 学校・くらし16字 */
-    {q:"学",  a:"まなぶ",  w:["あそぶ","はたらく","やすむ"],  e:"📚", ex:"「まなぶ」のほかに「がく」とも読むよ！「がっこう」「がくせい」！", exs:"まなぶのほかに、がくとも読むよ！がっこうやがくせいに使うね！"},
+    {q:"学",  a:"まな(ぶ)",  w:["あそ(ぶ)","はたら(く)","やす(む)"],  e:"📚", ex:"「まなぶ」のほかに「がく」とも読むよ！「がっこう」「がくせい」！", exs:"まなぶのほかに、がくとも読むよ！がっこうやがくせいに使うね！"},
     {q:"校",  a:"こう",    w:["がく","しょ","かん"],          e:"🏫", ex:"「こう」は「がっこう」「こうてい」「こうちょう」に使うよ！", exs:"こうは、がっこうやこうていやこうちょうに使うよ！"},
     {q:"先",  a:"さき",    w:["あと","なか","そと"],          e:"➡️", ex:"「さき」のほかに「せん」とも読むよ！「せんせい」「さきに」！", exs:"さきのほかに、せんとも読むよ！せんせいやさきにという言葉に使うね！"},
-    {q:"生",  a:"いきる",  w:["しぬ","ねる","たべる"],        e:"🌱", ex:"「いきる」のほかに「せい」とも読むよ！「たんじょうび」「せいかつ」！", exs:"いきるのほかに、せいとも読むよ！たんじょうびやせいかつに使うね！"},
+    {q:"生",  a:"い(きる)",  w:["し(ぬ)","ね(る)","た(べる)"],        e:"🌱", ex:"「いきる」のほかに「せい」とも読むよ！「たんじょうび」「せいかつ」！", exs:"いきるのほかに、せいとも読むよ！たんじょうびやせいかつに使うね！"},
     {q:"本",  a:"ほん",    w:["ざっし","かみ","ペン"],        e:"📖", ex:"「ほん」は「えほん」「きほん」「にほん」という言葉にも使うよ！", exs:"ほんは、えほんやきほんやにほんという言葉にも使うよ！"},
     {q:"年",  a:"とし",    w:["つき","ひ","しゅう"],          e:"🎂", ex:"「とし」のほかに「ねん」とも読むよ！「まいねん」「ことし」！", exs:"としのほかに、ねんとも読むよ！まいねんやことしに使うね！"},
     {q:"名",  a:"なまえ",  w:["かたち","いろ","おおきさ"],    e:"🏷️", ex:"「なまえ」のほかに「めい」とも読むよ！「ゆうめい」「なまえ」！", exs:"なまえのほかに、めいとも読むよ！ゆうめいという言葉に使うね！"},
@@ -1160,9 +1157,8 @@ function genAdd(lv){
 function genSub(lv){
   let a,b,tries=0;
   if(lv===1){
-    do{ a=rn(2,9); b=rn(1,a-1); }while(tries++<200&&false);
-    // just pick valid pair
-    b=rn(1,a-1);
+    // ②修正: Lv1は繰り下がりなし（a>b>0）を1回で生成。元コードの二重計算を除去。
+    a=rn(2,9); b=rn(1,a-1);
   }
   else if(lv===2){
     // 2けた(11-20) - 1けた、繰り下がりなし、答えは2けた(>=10)
@@ -1313,13 +1309,13 @@ function ansKan(btn,ok,q){
     recordKanjiMaster((q.q||'').replace(/[「」\n]/g,'').trim()||q.q||'');
     // 元のコードと同じ構造：spJa(q.a)とshowEpopKan(q.e)を並行、
     // 両方終わったら説明文表示→spJa(q.exs)→nextQ
-    Promise.all([spJa(q.a), showEpopKan(q.e)]).then(()=>{
+    Promise.all([spJa(q.a.replace(/[()（）]/g,'')), showEpopKan(q.e)]).then(()=>{
       document.querySelectorAll('.hint-btn').forEach(b=>b.style.display='none');
       const ex=$('kanex');
       if(ex&&q.ex){
         ex.classList.add('show');
         ex.innerHTML=`💡 ${q.ex}`;
-        setTimeout(()=>spJa(q.exs||q.ex).then(nextQ), 200);
+        setTimeout(()=>spJa(q.exs||q.ex).then(nextQ), 500);
       } else {
         nextQ();
       }
@@ -1376,19 +1372,19 @@ function buildMath(){
 
 // ── MATH OPTIONS ──
 function buildMathOpts(q){
-  const ans=q.ans;
+  const correctAns=q.ans;  // ①修正: ans2関数名との衝突を避けるためcorrectAnsにリネーム
   const ws=new Set(); let tries=0;
   while(ws.size<3&&tries<120){
     tries++;
     const d=(rn(1,5))*(Math.random()<.5?1:-1);
-    const w=ans+d;
-    if(w>=0&&w<=30&&w!==ans) ws.add(w);
+    const w=correctAns+d;
+    if(w>=0&&w<=30&&w!==correctAns) ws.add(w);
   }
-  shuffle([ans,...ws]).forEach(c=>{
+  shuffle([correctAns,...ws]).forEach(c=>{
     const b=mk('button','ch');
     b.style.fontSize='28px'; b.style.fontWeight='900';
     b.textContent=c;
-    b.onclick=()=>ans2(b,c===ans,ans,q.e||'⭐',String(ans));
+    b.onclick=()=>ans2(b,c===correctAns,correctAns,q.e||'⭐',String(correctAns));
     $('choices').appendChild(b);
   });
 }
@@ -1417,9 +1413,9 @@ function showHint(a,b,type){
           ${b} ＝ <span style="color:#C62828">${need}</span> ＋ <span style="color:#1565C0">${rest}</span>
         </div>
         <div style="display:flex;gap:4px;justify-content:center;margin-top:6px;flex-wrap:wrap">
-          ${Array.from({length:need}).map((_,i)=>`<div class="skb-block skb-block-ten" id="blk-need-${i}"></div>`).join('')}
+          ${Array.from({length:need}).map((_,i)=>`<div class="skb-block blk-need" id="blk-need-${i}"></div>`).join('')}
           <div style="width:6px"></div>
-          ${Array.from({length:rest}).map((_,i)=>`<div class="skb-block skb-block-add" id="blk-rest-${i}"></div>`).join('')}
+          ${Array.from({length:rest}).map((_,i)=>`<div class="skb-block blk-rest" id="blk-rest-${i}"></div>`).join('')}
         </div>
       </div>
 
@@ -1434,7 +1430,7 @@ function showHint(a,b,type){
           <span style="font-size:13px;color:#2E7D32">✨</span>
         </div>
         <div style="display:flex;gap:3px;justify-content:center;margin-top:6px;flex-wrap:wrap" id="blk-rounded-wrap">
-          ${Array.from({length:Math.min(rounded,20)}).map((_,i)=>`<div class="skb-block skb-block-result" id="blk-r-${i}"></div>`).join('')}
+          ${Array.from({length:Math.min(rounded,20)}).map((_,i)=>`<div class="skb-block blk-result" id="blk-r-${i}"></div>`).join('')}
         </div>
       </div>
 
@@ -1552,47 +1548,7 @@ function showHint(a,b,type){
   }
 }
 
-function skbSvgAdd(a,b,need,rest,rounded){
-  return `<svg viewBox="0 0 240 96" width="100%" style="max-width:280px;display:block;margin:0 auto;overflow:visible">
-    <rect x="2" y="32" width="38" height="30" rx="8" fill="#FFF9C4" stroke="#F9A825" stroke-width="2"/>
-    <text x="21" y="53" text-anchor="middle" font-size="18" font-weight="900" fill="#E65100">${a}</text>
-    <text x="52" y="53" text-anchor="middle" font-size="16" font-weight="900" fill="#555">＋</text>
-    <rect x="62" y="4" width="38" height="28" rx="8" fill="#FFCDD2" stroke="#EF9A9A" stroke-width="2"/>
-    <text x="81" y="23" text-anchor="middle" font-size="16" font-weight="900" fill="#C62828">${b}</text>
-    <line x1="81" y1="32" x2="68" y2="62" stroke="#EF9A9A" stroke-width="2.5" stroke-dasharray="5,3"/>
-    <line x1="81" y1="32" x2="114" y2="62" stroke="#90CAF9" stroke-width="2.5" stroke-dasharray="5,3"/>
-    <circle cx="68" cy="76" r="14" fill="#FFCDD2" stroke="#EF9A9A" stroke-width="2"/>
-    <text x="68" y="81" text-anchor="middle" font-size="13" font-weight="900" fill="#C62828">${need}</text>
-    <circle cx="114" cy="76" r="14" fill="#BBDEFB" stroke="#90CAF9" stroke-width="2"/>
-    <text x="114" y="81" text-anchor="middle" font-size="13" font-weight="900" fill="#1565C0">${rest}</text>
-    <text x="148" y="53" text-anchor="middle" font-size="20" fill="#999">→</text>
-    <rect x="155" y="32" width="44" height="30" rx="8" fill="#C8E6C9" stroke="#66BB6A" stroke-width="2"/>
-    <text x="177" y="53" text-anchor="middle" font-size="16" font-weight="900" fill="#2E7D32">${rounded}</text>
-    <text x="214" y="44" text-anchor="middle" font-size="11" fill="#555">＋${rest}</text>
-    <text x="214" y="57" text-anchor="middle" font-size="11" fill="#FF6B35" font-weight="900">＝${a+b}</text>
-  </svg>`;
-}
-
-function skbSvgSub(a,b,ones){
-  return `<svg viewBox="0 0 240 96" width="100%" style="max-width:280px;display:block;margin:0 auto;overflow:visible">
-    <rect x="2" y="4" width="38" height="28" rx="8" fill="#BBDEFB" stroke="#90CAF9" stroke-width="2"/>
-    <text x="21" y="23" text-anchor="middle" font-size="16" font-weight="900" fill="#283593">${a}</text>
-    <line x1="21" y1="32" x2="10" y2="62" stroke="#90CAF9" stroke-width="2.5" stroke-dasharray="5,3"/>
-    <line x1="21" y1="32" x2="52" y2="62" stroke="#FFAB91" stroke-width="2.5" stroke-dasharray="5,3"/>
-    <circle cx="10" cy="76" r="14" fill="#BBDEFB" stroke="#90CAF9" stroke-width="2"/>
-    <text x="10" y="81" text-anchor="middle" font-size="11" font-weight="900" fill="#1565C0">10</text>
-    <circle cx="52" cy="76" r="14" fill="#FFE0B2" stroke="#FFCC80" stroke-width="2"/>
-    <text x="52" y="81" text-anchor="middle" font-size="13" font-weight="900" fill="#E65100">${ones}</text>
-    <text x="84" y="50" text-anchor="middle" font-size="16" font-weight="900" fill="#555">－</text>
-    <rect x="96" y="34" width="32" height="28" rx="7" fill="#FFCDD2" stroke="#EF9A9A" stroke-width="2"/>
-    <text x="112" y="53" text-anchor="middle" font-size="16" font-weight="900" fill="#C62828">${b}</text>
-    <text x="140" y="50" text-anchor="middle" font-size="18" fill="#999">→</text>
-    <rect x="152" y="34" width="32" height="28" rx="7" fill="#C8E6C9" stroke="#66BB6A" stroke-width="2"/>
-    <text x="168" y="53" text-anchor="middle" font-size="15" font-weight="900" fill="#2E7D32">${10-b}</text>
-    <text x="200" y="50" text-anchor="middle" font-size="12" fill="#555">＋${ones}</text>
-  </svg>`;
-}
-
+// ⑥修正: skbSvgAdd / skbSvgSub は未使用のデッドコードのため削除
 
 function ans(btn,ok,correctText,emoji,correctSp,mode){
   if(ANS)return; ANS=true;
@@ -1764,7 +1720,11 @@ function genClock(lv){
     let wh=h,wm=m,ws=s;
     const which=rn(0,lv>=4?2:1);
     const d=rn(1,3);
-    if(which===0){wh=(h+d-1)%12+1;}
+    if(which===0){
+      // ⑦修正: Lv5は24時間制（0〜23）、それ以外は12時間制（1〜12）で計算
+      if(lv===5){ wh=(h+d)%24; }
+      else{ wh=(h+d-1)%12+1; }
+    }
     else if(which===1){wm=(m+(lv<=2?d*5:d)+60)%60;}
     else{ws=(s+d*10+60)%60;}
     let wl;
@@ -1783,6 +1743,16 @@ function buildClock(){
     <div class="q-label">とけいをよもう！なんじなんぷん？</div>
     <div class="clock-svg-wrap">
       <canvas id="clk-cv" width="180" height="180" style="border-radius:50%"></canvas>
+    </div>
+    <div style="display:flex;gap:14px;justify-content:center;align-items:center;margin:6px 0 2px;font-size:12px;font-weight:900">
+      <span style="display:flex;align-items:center;gap:4px">
+        <span style="display:inline-block;width:18px;height:5px;background:#E65100;border-radius:3px"></span>
+        <span style="color:#E65100">みじかいはり（じ）</span>
+      </span>
+      <span style="display:flex;align-items:center;gap:4px">
+        <span style="display:inline-block;width:22px;height:3px;background:#3949AB;border-radius:3px"></span>
+        <span style="color:#3949AB">ながいはり（ふん）</span>
+      </span>
     </div>
     <div style="display:flex;gap:0;justify-content:center;flex-wrap:wrap">
       <button class="speak-btn" onclick="spJa('なんじなんぷんですか？')">🔊 よんで！</button>
@@ -1849,16 +1819,16 @@ function buildHourHint(q){
 
   return `
   <div style="background:#FFF3E0;border:2px solid #FFB74D;border-radius:14px;padding:10px 12px;margin-bottom:8px">
-    <div style="font-size:12px;font-weight:900;color:#E65100;margin-bottom:6px">⏰ みじかいはり（じしん）</div>
-    <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
-      <svg width="${W}" height="${W}" viewBox="0 0 ${W} ${W}" style="flex-shrink:0">
+    <div style="font-size:12px;font-weight:900;color:#E65100;margin-bottom:6px;text-align:center">🟠 みじかいはり（じしん）</div>
+    <div style="display:flex;flex-direction:column;align-items:center;gap:8px">
+      <svg width="${W}" height="${W}" viewBox="0 0 ${W} ${W}">
         <!-- 文字盤 -->
         <circle cx="${cx}" cy="${cy}" r="${R}" fill="#FFFDE7" stroke="#5D4037" stroke-width="3"/>
         <!-- h と h+1 の数字を強調 -->
         ${[...Array(12)].map((_,i)=>{
           const n=i+1, a=toA(n/12);
           const isH=n===hPrev, isN=n===hNext;
-          const col=isH?'#FF6B35':isN?'#5C6BC0':'#9E9E9E';
+          const col=isH?'#E65100':isN?'#5C6BC0':'#9E9E9E';
           const fs=isH||isN?15:11;
           const fw=isH||isN?'900':'400';
           return `<text x="${px(55,a)}" y="${py(55,a)}" text-anchor="middle" dominant-baseline="middle" font-size="${fs}" font-weight="${fw}" fill="${col}">${n}</text>`;
@@ -1866,17 +1836,17 @@ function buildHourHint(q){
         <!-- h と h+1 の間を扇形ハイライト -->
         <path d="M${cx},${cy} L${px(R-2,aH)},${py(R-2,aH)} A${R-2},${R-2} 0 0,1 ${px(R-2,aHnext)},${py(R-2,aHnext)} Z"
               fill="#FF6B35" opacity=".15"/>
-        <!-- 時針 -->
+        <!-- 時針（オレンジ） -->
         <line x1="${cx}" y1="${cy}" x2="${px(42,aHand)}" y2="${py(42,aHand)}"
-              stroke="#3E2723" stroke-width="5" stroke-linecap="round"/>
+              stroke="#E65100" stroke-width="6" stroke-linecap="round"/>
         <!-- 中心 -->
-        <circle cx="${cx}" cy="${cy}" r="4" fill="#3E2723"/>
-        <!-- h ラベル -->
+        <circle cx="${cx}" cy="${cy}" r="5" fill="#E65100"/>
+        <!-- h ラベル強調円 -->
         <circle cx="${px(55,aH)}" cy="${py(55,aH)}" r="12" fill="#FF6B35" opacity=".25"/>
-        <!-- h+1 ラベル -->
+        <!-- h+1 ラベル強調円 -->
         <circle cx="${px(55,aHnext)}" cy="${py(55,aHnext)}" r="12" fill="#5C6BC0" opacity=".2"/>
       </svg>
-      <div style="font-size:13px;font-weight:700;color:#4E342E;line-height:1.8">${msg}</div>
+      <div style="font-size:13px;font-weight:700;color:#4E342E;line-height:1.9;text-align:center">${msg}</div>
     </div>
   </div>`;
 }
@@ -1886,37 +1856,15 @@ function buildMinuteHint(q){
   const m=q.m;
   const unit = lv<=2?5:(lv<=3?1:1);
 
-  if(lv===1){
-    // 10分単位: 0,10,20,30,40,50の6目盛りをアニメ
-    return `
-    <div style="background:#E8EAF6;border:2px solid #7986CB;border-radius:14px;padding:10px 12px">
-      <div style="font-size:12px;font-weight:900;color:#3949AB;margin-bottom:6px">⏰ ながいはり（ふんしん）</div>
-      <div id="min-hint-wrap" style="overflow-x:auto">
-        <svg id="min-hint-svg" width="300" height="80" viewBox="0 0 300 80" style="display:block;margin:0 auto"></svg>
-      </div>
-      <div id="min-hint-msg" style="font-size:13px;font-weight:700;color:#3949AB;margin-top:6px;text-align:center"></div>
-    </div>`;
-  } else if(lv===2){
-    // 5分単位: 0〜55の12目盛り
-    return `
-    <div style="background:#E8EAF6;border:2px solid #7986CB;border-radius:14px;padding:10px 12px">
-      <div style="font-size:12px;font-weight:900;color:#3949AB;margin-bottom:6px">⏰ ながいはり（ふんしん）</div>
-      <div id="min-hint-wrap" style="overflow-x:auto">
-        <svg id="min-hint-svg" width="320" height="80" viewBox="0 0 320 80" style="display:block;margin:0 auto"></svg>
-      </div>
-      <div id="min-hint-msg" style="font-size:13px;font-weight:700;color:#3949AB;margin-top:6px;text-align:center"></div>
-    </div>`;
-  } else {
-    // 1分単位（Lv3-5）: 時計盤に分の数字をアニメ表示
-    return `
-    <div style="background:#E8EAF6;border:2px solid #7986CB;border-radius:14px;padding:10px 12px">
-      <div style="font-size:12px;font-weight:900;color:#3949AB;margin-bottom:6px">⏰ ながいはり（ふんしん）</div>
-      <div id="min-hint-wrap">
-        <svg id="min-hint-svg" width="200" height="200" viewBox="0 0 200 200" style="display:block;margin:0 auto"></svg>
-      </div>
-      <div id="min-hint-msg" style="font-size:13px;font-weight:700;color:#3949AB;margin-top:6px;text-align:center"></div>
-    </div>`;
-  }
+  // Lv1/2/3以降すべてアナログ時計SVGで統一
+  return `
+  <div style="background:#E8EAF6;border:2px solid #7986CB;border-radius:14px;padding:10px 12px">
+    <div style="font-size:12px;font-weight:900;color:#3949AB;margin-bottom:6px">🔵 ながいはり（ふんしん）</div>
+    <div id="min-hint-wrap">
+      <svg id="min-hint-svg" width="200" height="200" viewBox="0 0 200 200" style="display:block;margin:0 auto"></svg>
+    </div>
+    <div id="min-hint-msg" style="font-size:13px;font-weight:700;color:#3949AB;margin-top:6px;text-align:center"></div>
+  </div>`;
 }
 
 function animateMinuteHint(q){
@@ -1925,78 +1873,8 @@ function animateMinuteHint(q){
   const lv=q.lv, m=q.m;
   const msg=document.getElementById('min-hint-msg');
 
-  if(lv===1){
-    // 10分単位: 横並びのマス目アニメ
-    const steps=[0,10,20,30,40,50];
-    const W=300, cellW=44, startX=10, y=40;
-    steps.forEach((v,i)=>{
-      const x=startX+i*cellW;
-      const isCurrent=(v===m);
-      const rect=document.createElementNS('http://www.w3.org/2000/svg','rect');
-      rect.setAttribute('x',x); rect.setAttribute('y',y-16);
-      rect.setAttribute('width',cellW-4); rect.setAttribute('height',32); rect.setAttribute('rx',8);
-      rect.setAttribute('fill', isCurrent?'#5C6BC0':'#C5CAE9');
-      rect.setAttribute('opacity','0');
-      rect.style.transition=`opacity 0.3s ease ${i*0.15}s`;
-      svg.appendChild(rect);
-
-      const text=document.createElementNS('http://www.w3.org/2000/svg','text');
-      text.setAttribute('x',x+cellW/2-2); text.setAttribute('y',y+7);
-      text.setAttribute('text-anchor','middle');
-      text.setAttribute('font-size', isCurrent?18:14);
-      text.setAttribute('font-weight','900');
-      text.setAttribute('fill', isCurrent?'white':'#3949AB');
-      text.setAttribute('opacity','0');
-      text.style.transition=`opacity 0.3s ease ${i*0.15}s`;
-      text.textContent=v;
-      svg.appendChild(text);
-
-      // 矢印（最後以外）
-      if(i<steps.length-1){
-        const arr=document.createElementNS('http://www.w3.org/2000/svg','text');
-        arr.setAttribute('x',x+cellW-2); arr.setAttribute('y',y+6);
-        arr.setAttribute('font-size',14); arr.setAttribute('fill','#9FA8DA');
-        arr.setAttribute('opacity','0');
-        arr.style.transition=`opacity 0.3s ease ${i*0.15+0.1}s`;
-        arr.textContent='→';
-        svg.appendChild(arr);
-      }
-      setTimeout(()=>{ rect.setAttribute('opacity','1'); text.setAttribute('opacity','1'); }, 50);
-    });
-    if(msg) msg.innerHTML=`ながいはりが「<b style="color:#5C6BC0">${m}</b>」のところ → <b style="font-size:16px;color:#5C6BC0">${m}ふん</b>！`;
-
-  } else if(lv===2){
-    // 5分単位: 5,10,15...の横並びアニメ（2行表示）
-    const steps=[0,5,10,15,20,25,30,35,40,45,50,55];
-    const cellW=24, row1=steps.slice(0,6), row2=steps.slice(6);
-    [[row1,15],[row2,52]].forEach(([row,baseY])=>{
-      row.forEach((v,i)=>{
-        const x=8+i*cellW+((row===row2)?6:0);
-        const isCurrent=(v===m);
-        const rect=document.createElementNS('http://www.w3.org/2000/svg','rect');
-        rect.setAttribute('x',x); rect.setAttribute('y',baseY);
-        rect.setAttribute('width',cellW-3); rect.setAttribute('height',22); rect.setAttribute('rx',5);
-        rect.setAttribute('fill',isCurrent?'#5C6BC0':'#C5CAE9');
-        rect.setAttribute('opacity','0');
-        const delay=(row===row2?6:0)+i;
-        rect.style.transition=`opacity 0.25s ease ${delay*0.1}s`;
-        svg.appendChild(rect);
-        const txt=document.createElementNS('http://www.w3.org/2000/svg','text');
-        txt.setAttribute('x',x+cellW/2-1); txt.setAttribute('y',baseY+15);
-        txt.setAttribute('text-anchor','middle');
-        txt.setAttribute('font-size',isCurrent?13:11);
-        txt.setAttribute('font-weight','900');
-        txt.setAttribute('fill',isCurrent?'white':'#3949AB');
-        txt.setAttribute('opacity','0');
-        txt.style.transition=`opacity 0.25s ease ${delay*0.1}s`;
-        txt.textContent=v;
-        svg.appendChild(txt);
-        setTimeout(()=>{ rect.setAttribute('opacity','1'); txt.setAttribute('opacity','1'); },50);
-      });
-    });
-    if(msg) msg.innerHTML=`ながいはりが「<b style="color:#5C6BC0">${m}</b>」のところ → <b style="font-size:16px;color:#5C6BC0">${m}ふん</b>！`;
-
-  } else {
+  // Lv1/2 も含めてすべてアナログ時計で統一
+  {
     // 1分単位: 時計盤に分の数字を順番にカウントアニメ
     const W=200, cx=100, cy=100, R=86;
     const toA=f=>(f*2*Math.PI)-Math.PI/2;
@@ -2010,36 +1888,43 @@ function animateMinuteHint(q){
     bg.setAttribute('fill','#EDE7F6'); bg.setAttribute('stroke','#7986CB'); bg.setAttribute('stroke-width','3');
     svg.appendChild(bg);
 
-    // 5分ごとの数字（0=60,5,10...55）
-    const fiveMarks=[0,5,10,15,20,25,30,35,40,45,50,55];
-    fiveMarks.forEach(v=>{
+    // Lv1は10分ごと、Lv2は5分ごと、Lv3以上は全目盛り＋5分ごと数字
+    const marks = lv===1
+      ? [0,10,20,30,40,50]
+      : [0,5,10,15,20,25,30,35,40,45,50,55];
+
+    // 5分ごとの数字表示
+    marks.forEach(v=>{
       const a=toA(v/60);
+      const isCur=(v===m);
+      // ハイライト円
+      if(isCur){
+        const hl=document.createElementNS(ns,'circle');
+        hl.setAttribute('cx',px(70,a)); hl.setAttribute('cy',py(70,a));
+        hl.setAttribute('r','10'); hl.setAttribute('fill','#3949AB'); hl.setAttribute('opacity','0.25');
+        svg.appendChild(hl);
+      }
       const t=document.createElementNS(ns,'text');
       t.setAttribute('x',px(70,a)); t.setAttribute('y',py(70,a));
       t.setAttribute('text-anchor','middle'); t.setAttribute('dominant-baseline','middle');
-      t.setAttribute('font-size','11'); t.setAttribute('font-weight','700');
-      t.setAttribute('fill', v===m?'#3949AB':'#9FA8DA');
-      t.textContent=v||'0';
+      t.setAttribute('font-size', isCur?'14':'11');
+      t.setAttribute('font-weight', isCur?'900':'700');
+      t.setAttribute('fill', isCur?'#3949AB':'#9FA8DA');
+      t.textContent=v===0?'0':v;
       svg.appendChild(t);
     });
 
-    // 分針
+    // 長い針（青）
     const mFrac=(m+(q.lv>=4?q.s/60:0))/60;
     const mAngle=toA(mFrac);
     const hand=document.createElementNS(ns,'line');
     hand.setAttribute('x1',cx); hand.setAttribute('y1',cy);
     hand.setAttribute('x2',px(75,mAngle)); hand.setAttribute('y2',py(75,mAngle));
-    hand.setAttribute('stroke','#5C6BC0'); hand.setAttribute('stroke-width','3.5');
+    hand.setAttribute('stroke','#3949AB'); hand.setAttribute('stroke-width','4');
     hand.setAttribute('stroke-linecap','round');
     svg.appendChild(hand);
 
-    // 現在の分をハイライト
-    const dot=document.createElementNS(ns,'circle');
-    dot.setAttribute('cx',px(70,toA(m/60))); dot.setAttribute('cy',py(70,toA(m/60)));
-    dot.setAttribute('r','8'); dot.setAttribute('fill','#5C6BC0'); dot.setAttribute('opacity','0.35');
-    svg.appendChild(dot);
-
-    // 中心
+    // 中心（青）
     const center=document.createElementNS(ns,'circle');
     center.setAttribute('cx',cx); center.setAttribute('cy',cy);
     center.setAttribute('r','5'); center.setAttribute('fill','#3949AB');
@@ -2048,10 +1933,11 @@ function animateMinuteHint(q){
     // カウントアニメ: 0→m まで数字を増やす
     if(msg){
       let count=0;
+      const step = lv===1?10:(lv===2?5:1);
       const tick=()=>{
-        msg.innerHTML=`かぞえると… <b style="color:#5C6BC0;font-size:18px">${count}</b>ふん`;
-        if(count<m){ count++; setTimeout(tick, m>20?60:100); }
-        else msg.innerHTML=`ながいはりは <b style="color:#5C6BC0;font-size:20px">${m}ふん</b> をさしているよ！`;
+        msg.innerHTML=`ながいはりは… <b style="color:#3949AB;font-size:18px">${count}</b>ふん`;
+        if(count<m){ count+=step; if(count>m)count=m; setTimeout(tick, m>20?80:120); }
+        else msg.innerHTML=`ながいはりは <b style="color:#3949AB;font-size:20px">${m}ふん</b> をさしているよ！`;
       };
       setTimeout(tick,400);
     }
@@ -2107,24 +1993,25 @@ function drawClock(q){
     ctx.strokeStyle='#D7CCC8';ctx.lineWidth=1;ctx.stroke();
   }
 
-  // 時針
+  // 時針（オレンジ：みじかいはり）
   const hFrac=((q.h%12)+q.m/60+(q.lv>=4?q.s/3600:0))/12;
-  drawHand(ctx,cx,cy,toAngle(hFrac),48,6,'#3E2723');
+  drawHand(ctx,cx,cy,toAngle(hFrac),48,7,'#E65100');
 
-  // 分針
+  // 分針（青：ながいはり）
   const mFrac=(q.m+(q.lv>=4?q.s/60:0))/60;
-  drawHand(ctx,cx,cy,toAngle(mFrac),68,4,'#5D4037');
+  drawHand(ctx,cx,cy,toAngle(mFrac),68,4,'#3949AB');
 
-  // 秒針（Lv4以上）
+  // 秒針（Lv4以上・赤）
   if(q.lv>=4){
     const sFrac=q.s/60;
-    drawHand(ctx,cx,cy,toAngle(sFrac),74,1.5,'#FF6B35');
-    drawHand(ctx,cx,cy,toAngle(sFrac)+Math.PI,14,1.5,'#FF6B35');
+    drawHand(ctx,cx,cy,toAngle(sFrac),74,1.5,'#E53935');
+    drawHand(ctx,cx,cy,toAngle(sFrac)+Math.PI,14,1.5,'#E53935');
   }
 
-  // 中心点
-  ctx.beginPath();ctx.arc(cx,cy,5,0,2*Math.PI);ctx.fillStyle='#3E2723';ctx.fill();
-  if(q.lv>=4){ctx.beginPath();ctx.arc(cx,cy,3,0,2*Math.PI);ctx.fillStyle='#FF6B35';ctx.fill();}
+  // 中心点（二重円でオレンジ×白）
+  ctx.beginPath();ctx.arc(cx,cy,6,0,2*Math.PI);ctx.fillStyle='#E65100';ctx.fill();
+  ctx.beginPath();ctx.arc(cx,cy,3,0,2*Math.PI);ctx.fillStyle='white';ctx.fill();
+  if(q.lv>=4){ctx.beginPath();ctx.arc(cx,cy,2,0,2*Math.PI);ctx.fillStyle='#E53935';ctx.fill();}
 }
 
 function drawHand(ctx,cx,cy,angle,len,width,color){
@@ -2161,7 +2048,6 @@ function googleTTS(text, lang){
                +'&client=tw-ob&q='+encodeURIComponent(chunks[i]);
       const audio=new Audio(url);
       audio.volume=1;
-      // onerror と play().catch の二重呼び出しを防ぐフラグ
       let failed=false;
       function onFail(){
         if(failed) return; failed=true;
@@ -2177,31 +2063,51 @@ function googleTTS(text, lang){
   });
 }
 
-// フォールバック: ブラウザ内蔵 Web Speech API
+// フォールバック: ブラウザ内蔵 Web Speech API（Android対応）
 function fallbackTTS(text, lang){
   return new Promise(resolve=>{
     if(!window.speechSynthesis){ resolve(); return; }
-    const u=new SpeechSynthesisUtterance(text);
-    u.lang=lang;
-    u.rate=lang.startsWith('ja')?0.85:0.82;
-    u.pitch=1.1;
-    u.volume=1;
-    const vs=speechSynthesis.getVoices();
-    if(lang.startsWith('ja')){
-      const fv=vs.find(v=>v.lang.startsWith('ja')&&/female|woman|kyoko|haruka/i.test(v.name))
-             ||vs.find(v=>v.lang.startsWith('ja'));
-      if(fv) u.voice=fv;
-    } else {
-      const fv=vs.find(v=>v.lang.startsWith('en')&&/female|woman|samantha|karen/i.test(v.name))
-             ||vs.find(v=>v.lang.startsWith('en'));
-      if(fv) u.voice=fv;
+
+    function doSpeak(){
+      // 喋り中なら止める（cancel直後は少し待つ必要がある）
+      if(speechSynthesis.speaking || speechSynthesis.pending){
+        speechSynthesis.cancel();
+        setTimeout(doSpeak, 150);
+        return;
+      }
+
+      const u = new SpeechSynthesisUtterance(text);
+      u.lang   = lang;
+      u.rate   = lang.startsWith('ja') ? 0.85 : 0.82;
+      u.pitch  = 1.1;
+      u.volume = 1;
+
+      // ボイス選択
+      const vs = speechSynthesis.getVoices();
+      if(lang.startsWith('ja')){
+        const fv = vs.find(v=>v.lang.startsWith('ja')&&/female|woman|kyoko|haruka/i.test(v.name))
+                || vs.find(v=>v.lang.startsWith('ja'));
+        if(fv) u.voice = fv;
+      } else {
+        const fv = vs.find(v=>v.lang.startsWith('en')&&/female|woman|samantha|karen/i.test(v.name))
+                || vs.find(v=>v.lang.startsWith('en'));
+        if(fv) u.voice = fv;
+      }
+
+      let done = false;
+      const finish = ()=>{ if(!done){ done=true; resolve(); } };
+      u.onend  = finish;
+      u.onerror= finish;
+      speechSynthesis.speak(u);
+
+      // Android: onendが発火しない場合のタイムアウト保険
+      // 文字数×150ms + 余裕3秒
+      const ms = text.length * 150 + 3000;
+      setTimeout(finish, ms);
     }
-    // onend/onerror 二重発火防止
-    let done=false;
-    u.onend=()=>{ if(!done){done=true;resolve();} };
-    u.onerror=()=>{ if(!done){done=true;resolve();} };
-    speechSynthesis.cancel();
-    speechSynthesis.speak(u);
+
+    // 喋り中かチェックしてからspeak
+    doSpeak();
   });
 }
 
@@ -2742,12 +2648,12 @@ function loadRecord(){
 let REC = {
   totalStars: 0,          // 累計スター数
   lastStage: 0,           // 最後の成長ステージ
-  cleared: {              // {mode_lv: true} クリア済み
-    add:{1:false,2:false,3:false,4:false,5:false},
-    sub:{1:false,2:false,3:false,4:false,5:false},
-    eng:{1:false,2:false,3:false,4:false,5:false},
-    kan:{1:false,2:false,3:false,4:false,5:false},
-    clk:{1:false,2:false,3:false,4:false,5:false},
+  cleared: {              // ③修正: キーを文字列に統一（JSON.parse後も文字列キーになるため）
+    add:{'1':false,'2':false,'3':false,'4':false,'5':false},
+    sub:{'1':false,'2':false,'3':false,'4':false,'5':false},
+    eng:{'1':false,'2':false,'3':false,'4':false,'5':false},
+    kan:{'1':false,'2':false,'3':false,'4':false,'5':false},
+    clk:{'1':false,'2':false,'3':false,'4':false,'5':false},
   },
   kanjiMastered: {},      // {kanji: true} 習得済み漢字
   maxLv: {add:0,sub:0,eng:0,kan:0,clk:0}, // 各コース最高クリアLv
@@ -3034,10 +2940,12 @@ function addStar(n=1){
 
 // ── クリア記録 ──
 function recordClear(mode, lv, score){
+  // ③修正: lvをString()で文字列化しJSON.parse後のキー型と統一
+  const lvKey = String(lv);
   if(score>=7){  // 7問以上正解でクリア
-    if(!REC.cleared[mode]||!REC.cleared[mode][lv]){
+    if(!REC.cleared[mode]||!REC.cleared[mode][lvKey]){
       if(!REC.cleared[mode]) REC.cleared[mode]={};
-      REC.cleared[mode][lv]=true;
+      REC.cleared[mode][lvKey]=true;
       REC.maxLv[mode]=Math.max(REC.maxLv[mode]||0, lv);
       saveRecord();
     }
